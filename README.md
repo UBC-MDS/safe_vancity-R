@@ -28,7 +28,7 @@ For example, selecting "Mount Pleasant" as neighbourhood, the dashboard will dis
 
 ### App Design
 
-![app](src/images/dashboard.png)
+![app](https://github.com/UBC-MDS/safe_vancity-R/blob/main/src/images/dash_design.png)
 
 ### Implementation and user guide
 
