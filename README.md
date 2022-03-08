@@ -36,11 +36,11 @@ For example, selecting "Mount Pleasant" as neighbourhood, the dashboard will dis
 
 TO BE ADDED
 
-2. Usage of total reported cases by crime category plot
+1. Usage of total reported cases by crime category plot
 
 TO BE ADDED
 
-3. Usage of total reported cases by day of the week plot
+1. Usage of total reported cases by day of the week plot
 
 TO BE ADDED
 
