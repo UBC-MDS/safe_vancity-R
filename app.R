@@ -11,7 +11,7 @@ app <-
 #----------------------------------------------------------------------------#
 crime <-
   readr::read_csv(here::here('data', 'processed', 'crime_clean.csv'))
-crime <- crime[-c(27517, 30974, 30976, 30979, 30991, 27284), ]
+crime <- crime[-c(27517, 30974, 30976, 30979, 30991, 27284),]
 crime <-
   crime %>% mutate(CRIME_CATEGORY = crime_category) %>% select(-crime_category)
 
@@ -41,110 +41,6 @@ tab_selected_style = list(
 
 app$layout(htmlDiv(
   list(
-    htmlImg(
-      src = app$get_asset_url("logo-1.jpg"),
-      id = "logo_image",
-      style = list(
-        height = "80px",
-        width = "auto",
-        `margin-bottom` = "10px",
-        `padding-left` = 0
-      ),
-      
-    ),
-    htmlH2(
-      "Vancouver Crime Incidence Dashboard",
-      style = list(
-        `margin-bottom` = "0px",
-        color = "white",
-        textalign = "right"
-      ),
-    ),
-    htmlH3(
-      "Incidence for 2021",
-      style = list(
-        `margin-top` = "0px",
-        color = "white",
-        textalign = "right"
-      )
-    ),
-    
-    htmlH6(paste("Last Updated: ", Sys.time()),
-           style = list(color = "orange")),
-    
-    #### summary stats
-    
-    
-    htmlH6(
-      'Total crimes',
-      style = list(
-        textalign = 'center',
-        color = 'white',
-        fontSize = 33
-      )
-    ),
-    htmlP(
-      "32,007",
-      style = list(
-        textalign = 'center',
-        color = '#4C78A8',
-        fontSize = 30
-      )
-    ),
-    
-    htmlH6(
-      'Total property crimes',
-      style = list(
-        textalign = 'center',
-        color = 'white',
-        fontSize = 33
-      )
-    ),
-    htmlP(
-      "21,853",
-      style = list(
-        textalign = 'center',
-        color = '#4C78A8',
-        fontSize = 30
-      )
-    ),
-    
-    htmlH6(
-      'Total violent crimes',
-      style = list(
-        textalign = 'center',
-        color = 'white',
-        fontSize = 33
-      )
-    ),
-    htmlP(
-      "9,114",
-      style = list(
-        textalign = 'center',
-        color = '#4C78A8',
-        fontSize = 30
-      )
-    ),
-    
-    htmlH6(
-      'Total vehicle collisions',
-      style = list(
-        textalign = 'center',
-        color = 'white',
-        fontSize = 33
-      )
-    ),
-    htmlP(
-      "1,040",
-      style = list(
-        textalign = 'center',
-        color = '#4C78A8',
-        fontSize = 30
-      )
-    ),
-    
-    ######
-    
     toast <- div(list(
       dbcButton(
         "About",
@@ -181,128 +77,295 @@ app$layout(htmlDiv(
     )),
     
     
-    ####
-    
-    htmlDiv(dccGraph(id = 'van_map')),
-    htmlBr(),
-    
-    htmlDiv(dccGraph(id = 'plot-area')),
-    htmlBr(),
-    
-    htmlLabel(
-      "FILTERS",
-      className = "fix_label",
-      style = list(
-        color = "orange",
-        textAlign = "center",
-        fontSize = 20
-      )
-    ),
     
     
-    htmlLabel('Select crime type', style = list('color' = 'white')),
-    dccDropdown(
-      id = 'crimetype_selection',
-      options = crimetypes_l$TYPE %>% purrr::map(function(col)
-        list(label = col, value = col)),
-      placeholder = "Select crime type",
-      value = "Break and Enter Commercial",
-      style = list('color' = 'white')
-    ),
     
-    htmlLabel('Select neighbourhood', style = list('color' = 'white')),
-    dccDropdown(
-      id = 'neigh_selection',
-      options = levels(as.factor(crime$NEIGHBOURHOOD))  %>%
-        purrr::map(function(col)
-          list(label = col, value = col)),
-      placeholder = "Select neighbourhood",
-      value = "West End",
-      style = list('color' = 'white')
-    ),
-    
-    htmlLabel('Select month', style = list('color' = 'white')),
-    dccDropdown(
-      id = 'month_selection',
-      options = month_l$month_name %>% purrr::map(function(col)
-        list(label = col, value = col)),
-      placeholder = "Select Month",
-      value = "Jan",
-      style = list('color' = 'white')
-    ),
-    
-    htmlLabel('Select Weekday', style = list('color' = 'white')),
-    dccDropdown(
-      id = "weekday_dropdown",
-      value = "All",
-      options = list(
-        list(label = "Sunday", value = "Sunday"),
-        list(label = "Monday", value = "Monday"),
-        list(label = "Tuesday", value = "Tuesday"),
-        list(label = "Wednesday", value = "Wednesday"),
-        list(label = "Thursday", value = "Thursday"),
-        list(label = "Friday", value = "Friday"),
-        list(label = "Saturday", value = "Saturday")
-      )
-    ),
-    
-    
-    htmlLabel(
-      list("Data Source: "),
-      className = "fix_label",
-      style = list(
-        color = "orange",
-        textAlign = "center",
-        `margin-top` = "80px"
-      )
-    ),
-    htmlLabel(
+    htmlDiv(
       list(
-        htmlA("VPD Open Source",
-              href = "https://geodash.vpd.ca/opendata/#")
+        htmlDiv(list(
+          htmlImg(
+            src = app$get_asset_url("logo-1.jpg"),
+            id = "logo_image",
+            style = list(
+              height = "80px",
+              width = "auto",
+              `margin-bottom` = "10px",
+              `padding-left` = 0
+            ),
+            
+          )
+        ), className = "one column"),
+        htmlDiv(list(htmlDiv(
+          list(
+            htmlH2(
+              "Vancouver Crime Incidence Dashboard",
+              style = list(
+                `margin-bottom` = "0px",
+                color = "white",
+                textalign = "right"
+              ),
+            ),
+            htmlH3(
+              "Incidence for 2021",
+              style = list(
+                `margin-top` = "0px",
+                color = "white",
+                textalign = "right"
+              )
+            )
+          )
+        )), className = "six column",
+        id = "title")
       ),
-      className = "fix_label",
-      style = list(
-        color = "white",
-        textAlign = "center",
-        `margin-top` = "0px"
-      )
+      id = "header",
+      className = "row flex-display",
+      style = list(`margin-bottom` = "25px")
     ),
     
     
     
-    dccTabs(
-      id = "crime_category-widget",
-      value = "All",
-      children = list(
-        dccTab(
-          label = "All",
-          value = "All",
-          style = tab_style,
-          selected_style = tab_selected_style,
+    #### summary stats
+    
+    
+    htmlDiv(list(
+      htmlDiv(list(
+        htmlH6(
+          'Total crimes',
+          style = list(
+            textalign = 'center',
+            color = 'white',
+            fontSize = 28
+          )
         ),
-        dccTab(
-          label = "Violent crimes",
-          value = "Violent crimes",
-          style = tab_style,
-          selected_style = tab_selected_style,
-        ),
-        dccTab(
-          label = "Property crimes",
-          value = "Property crimes",
-          style = tab_style,
-          selected_style = tab_selected_style,
-        ),
-        dccTab(
-          label = "Vehicle collision",
-          value = "Vehicle collision",
-          style = tab_style,
-          selected_style = tab_selected_style,
+        htmlP(
+          " 32,007",
+          style = list(
+            textalign = 'center',
+            color = '#4C78A8',
+            fontSize = 25
+          )
         )
-      )
-    ),
-    dccGraph(id = 'bar-plot-1')
-  )
+      ), className = "card_container two columns"),
+      
+      
+      htmlDiv(list(
+        htmlH6(
+          'Total property crimes',
+          style = list(
+            textalign = 'center',
+            color = 'white',
+            fontSize = 28
+          )
+        ),
+        htmlP(
+          " 21,853",
+          style = list(
+            textalign = 'center',
+            color = '#4C78A8',
+            fontSize = 25
+          )
+        )
+      ), className = "card_container three columns"),
+      
+      
+      htmlDiv(list(
+        htmlH6(
+          'Total violent crimes',
+          style = list(
+            textalign = 'center',
+            color = 'white',
+            fontSize = 28
+          )
+        ),
+        htmlP(
+          " 9,114",
+          style = list(
+            textalign = 'center',
+            color = '#4C78A8',
+            fontSize = 25
+          )
+        )
+      ), className = "card_container three columns"),
+      
+      htmlDiv(list(
+        htmlH6(
+          'Total vehical collision',
+          style = list(
+            textalign = 'center',
+            color = 'white',
+            fontSize = 28
+          )
+        ),
+        htmlP(
+          " 1,040",
+          style = list(
+            textalign = 'center',
+            color = '#4C78A8',
+            fontSize = 25
+          )
+        )
+      ), className = "card_container three columns")
+      
+    )),
+    
+    ######
+    
+    
+    htmlDiv(list(
+      htmlDiv(list(htmlDiv(
+        dccGraph(
+          id = 'van_map',
+          style = list(
+            `border-width` = "0",
+            width = "100%",
+            height = "475px"
+          )
+        )
+      )), className = "create_container seven columns"),
+      htmlDiv(list(htmlDiv(
+        dccGraph(
+          id = 'plot-area',
+          style = list(
+            `border-width` = "0",
+            width = "400px",
+            height = "475px"
+          )
+        )
+      )), className = "create_container four columns")
+    ), className = "row flex-display"),
+    
+    
+    htmlDiv(list(
+      htmlDiv(
+        list(
+          htmlLabel(
+            "FILTERS",
+            className = "fix_label",
+            style = list(
+              color = "orange",
+              textAlign = "center",
+              fontSize = 20
+            )
+          ),
+          
+          
+          htmlLabel('Select crime type', style = list('color' = 'white')),
+          dccDropdown(
+            id = 'crimetype_selection',
+            options = crimetypes_l$TYPE %>% purrr::map(function(col)
+              list(label = col, value = col)),
+            placeholder = "Select crime type",
+            value = "Break and Enter Commercial",
+            style = list('color' = 'white')
+          ),
+          
+          htmlLabel('Select neighbourhood', style = list('color' = 'white')),
+          dccDropdown(
+            id = 'neigh_selection',
+            options = levels(as.factor(crime$NEIGHBOURHOOD))  %>%
+              purrr::map(function(col)
+                list(label = col, value = col)),
+            placeholder = "Select neighbourhood",
+            value = "West End",
+            style = list('color' = 'white')
+          ),
+          
+          htmlLabel('Select month', style = list('color' = 'white')),
+          dccDropdown(
+            id = 'month_selection',
+            options = month_l$month_name %>% purrr::map(function(col)
+              list(label = col, value = col)),
+            placeholder = "Select Month",
+            value = "Jan",
+            style = list('color' = 'white')
+          ),
+          
+          htmlLabel('Select Weekday', style = list('color' = 'white')),
+          dccDropdown(
+            id = "weekday_dropdown",
+            value = "All",
+            options = list(
+              list(label = "Sunday", value = "Sunday"),
+              list(label = "Monday", value = "Monday"),
+              list(label = "Tuesday", value = "Tuesday"),
+              list(label = "Wednesday", value = "Wednesday"),
+              list(label = "Thursday", value = "Thursday"),
+              list(label = "Friday", value = "Friday"),
+              list(label = "Saturday", value = "Saturday")
+            )
+          ),
+          
+          
+          htmlLabel(
+            list("Data Source: "),
+            className = "fix_label",
+            style = list(
+              color = "orange",
+              textAlign = "center",
+              `margin-top` = "80px"
+            )
+          ),
+          htmlLabel(
+            list(
+              htmlA("VPD Open Source",
+                    href = "https://geodash.vpd.ca/opendata/#")
+            ),
+            className = "fix_label",
+            style = list(
+              color = "white",
+              textAlign = "center",
+              `margin-top` = "0px"
+            )
+          ),
+          
+          htmlH6(paste("Last Updated: ", Sys.time()),
+                 style = list(color = "orange"))
+        ),
+        className = "create_container three columns"
+      ),
+      
+      
+      
+      htmlDiv(list(
+        dccTabs(
+          id = "crime_category-widget",
+          value = "All",
+          children = list(
+            dccTab(
+              label = "All",
+              value = "All",
+              style = tab_style,
+              selected_style = tab_selected_style,
+            ),
+            dccTab(
+              label = "Violent crimes",
+              value = "Violent crimes",
+              style = tab_style,
+              selected_style = tab_selected_style,
+            ),
+            dccTab(
+              label = "Property crimes",
+              value = "Property crimes",
+              style = tab_style,
+              selected_style = tab_selected_style,
+            ),
+            dccTab(
+              label = "Vehicle collision",
+              value = "Vehicle collision",
+              style = tab_style,
+              selected_style = tab_selected_style,
+            )
+          )
+        ),
+        dccGraph(id = 'bar-plot-1')
+      ), className = "create_container eight columns")
+    ), className = "row flex-display")
+    
+    
+    
+  ),
+  id = "mainContainer",
+  style = list(display = "flex", `flex-direction` = "column")
 ))
 
 app$callback(output('bar-plot-1', 'figure'),
@@ -393,7 +456,7 @@ app$callback(output('plot-area', 'figure'),
                    filter(NEIGHBOURHOOD == neighbourhood)
                  p <- ggplot(crime_c_new) +
                    aes(x = reorder(CRIME_CATEGORY, n)) +
-                   geom_bar(stat = "count", fill = '#4C78A8') +
+                   geom_bar(stat = "count", fill = '#4C78A8') + #, width=0.4, position = position_dodge(width=0.1)
                    labs(
                      title = paste("Total Reported Crimes in", neighbourhood),
                      x = "Crime Category",
@@ -405,8 +468,8 @@ app$callback(output('plot-area', 'figure'),
                        face = "bold",
                        color = "#FFFFFF"
                      ),
-                     axis.text = element_text(size = 12, color = "#FFFFFF"),
-                     axis.title = element_text(size = 12, color = "#FFFFFF"),
+                     axis.text = element_text(size = 8, color = "#FFFFFF"),
+                     axis.title = element_text(size = 8, color = "#FFFFFF"),
                      axis.text.x = element_text(angle = 45),
                      panel.grid.major = element_blank(),
                      panel.grid.minor = element_blank(),
@@ -445,7 +508,7 @@ app$callback(output('plot-area', 'figure'),
                  
                }
                
-               ggplotly(p, height = 625, width = 475) %>% layout(dragmode = 'select')
+               ggplotly(p, height = 475, width = 400) %>% layout(dragmode = 'select')
                
              })
 
