@@ -313,7 +313,7 @@ app$callback(output('bar-plot-1', 'figure'),
                if (crime_category == "All") {
                  p <- crime %>%
                    filter(NEIGHBOURHOOD == neighbourhood)  %>%
-                   add_count(TYPE)  %>%
+                   dplyr::add_count(TYPE)  %>%
                    ggplot(aes(y = reorder(TYPE, n), text = n)) +
                    geom_bar(fill = '#aec7e8') +
                    ggtitle(paste("Total Reported Cases by Crime Types in", neighbourhood)) +
@@ -335,7 +335,7 @@ app$callback(output('bar-plot-1', 'figure'),
                  p <- crime  %>%
                    filter(NEIGHBOURHOOD == neighbourhood &
                             CRIME_CATEGORY == crime_category)  %>%
-                   add_count(TYPE)  %>%
+                   dplyr::add_count(TYPE)  %>%
                    ggplot(aes(y = reorder(TYPE, n), text = n)) +
                    geom_bar(fill = '#aec7e8') +
                    ggtitle(paste(
@@ -369,7 +369,7 @@ app$callback(output('plot-area', 'figure'),
              function(weekday, neighbourhood) {
                if (weekday == "All") {
                  crime_c <- crime %>%
-                   add_count(CRIME_CATEGORY)
+                   dplyr::add_count(CRIME_CATEGORY)
                  crime_c_new = crime_c %>%
                    filter(NEIGHBOURHOOD == neighbourhood)
                  p <- ggplot(crime_c_new) +
@@ -397,7 +397,7 @@ app$callback(output('plot-area', 'figure'),
                  
                } else {
                  crime_c <- crime %>%
-                   add_count(CRIME_CATEGORY)
+                   dplyr::add_count(CRIME_CATEGORY)
                  crime_c_new = crime_c %>%
                    filter(day_of_week == weekday &
                             NEIGHBOURHOOD == neighbourhood)
