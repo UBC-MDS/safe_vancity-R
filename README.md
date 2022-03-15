@@ -4,7 +4,7 @@ Welcome! 👋 欢迎 🎊 Bienvenue! 🎉
 
 Thank you for visiting the Safe Vancity app project repository (R version). This is a Vancouver crime incidence app and we are your friendly, neighbourhood data scientists wanting to help you make the safest choice of location for your next forever or rental homes with the creation of this app.  
 
-The most recent version of the dashboard is available at the following link: TO BE ADDED
+The most recent version of the dashboard is available at the following link: [Safe Vancity-R](https://safevancity-r.herokuapp.com/)
 
 In this document, we outline some information about the project. See sections below:
 
