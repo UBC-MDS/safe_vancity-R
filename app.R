@@ -11,7 +11,7 @@ app <-
 #----------------------------------------------------------------------------#
 crime <-
   readr::read_csv(here::here('data', 'processed', 'crime_clean.csv'))
-crime <- crime[-c(27517, 30974, 30976, 30979, 30991, 27284),]
+crime <- crime[-c(27517, 30974, 30976, 30979, 30991, 27284), ]
 crime <-
   crime %>% mutate(CRIME_CATEGORY = crime_category) %>% select(-crime_category)
 
@@ -71,59 +71,91 @@ app$layout(htmlDiv(
     
     htmlH6(paste("Last Updated: ", Sys.time()),
            style = list(color = "orange")),
-      
-#### summary stats
-      
-
-    htmlH6('Total crimes',
-        style=list(textalign = 'center',
-                    color = 'white',
-                    fontSize = 33)),
-    htmlP("32,007",
-        style=list(textalign = 'center',
-                    color = '#4C78A8',
-                    fontSize = 30)),
-      
-        htmlH6('Total property crimes',
-        style=list(textalign = 'center',
-                    color = 'white',
-                    fontSize = 33)),
-    htmlP("21,853",
-        style=list(textalign = 'center',
-                    color = '#4C78A8',
-                    fontSize = 30)),
-      
-        htmlH6('Total violent crimes',
-        style=list(textalign = 'center',
-                    color = 'white',
-                    fontSize = 33)),
-    htmlP("9,114",
-        style=list(textalign = 'center',
-                    color = '#4C78A8',
-                    fontSize =30)),  
-      
-        htmlH6('Total vehicle collisions',
-        style=list(textalign = 'center',
-                    color = 'white',
-                    fontSize = 33)),
-    htmlP("1,040",
-        style=list(textalign = 'center',
-                    color = '#4C78A8',
-                    fontSize = 30)),
-      
-      ######
-      
-    toast <- div(
-  list(
-    dbcButton(
-      "About",
-      id = "simple-toast-toggle",
-      color = "light",
-      n_clicks = 0,
-      className = "mb-3",
+    
+    #### summary stats
+    
+    
+    htmlH6(
+      'Total crimes',
+      style = list(
+        textalign = 'center',
+        color = 'white',
+        fontSize = 33
+      )
     ),
-    dbcToast(
-      list(htmlA(
+    htmlP(
+      "32,007",
+      style = list(
+        textalign = 'center',
+        color = '#4C78A8',
+        fontSize = 30
+      )
+    ),
+    
+    htmlH6(
+      'Total property crimes',
+      style = list(
+        textalign = 'center',
+        color = 'white',
+        fontSize = 33
+      )
+    ),
+    htmlP(
+      "21,853",
+      style = list(
+        textalign = 'center',
+        color = '#4C78A8',
+        fontSize = 30
+      )
+    ),
+    
+    htmlH6(
+      'Total violent crimes',
+      style = list(
+        textalign = 'center',
+        color = 'white',
+        fontSize = 33
+      )
+    ),
+    htmlP(
+      "9,114",
+      style = list(
+        textalign = 'center',
+        color = '#4C78A8',
+        fontSize = 30
+      )
+    ),
+    
+    htmlH6(
+      'Total vehicle collisions',
+      style = list(
+        textalign = 'center',
+        color = 'white',
+        fontSize = 33
+      )
+    ),
+    htmlP(
+      "1,040",
+      style = list(
+        textalign = 'center',
+        color = '#4C78A8',
+        fontSize = 30
+      )
+    ),
+    
+    ######
+    
+    toast <- div(list(
+      dbcButton(
+        "About",
+        id = "simple-toast-toggle",
+        color = "light",
+        n_clicks = 0,
+        className = "mb-3",
+      ),
+      dbcToast(
+        list(
+          htmlA(
             "GitHub",
             href = "https://github.com/UBC-MDS/safe_vancity",
             style = list(color = "white", "text-decoration" = "underline"),
@@ -138,22 +170,21 @@ app$layout(htmlDiv(
           htmlP(
             "This dashboard allows you to see crime incidence in 2021 in Vancouver neighbourhoods. By selecting a neighbourhood from the drop down menu, all the plots in the app will display metrics related to that neighbourhood. The map will display crime density by 'neighbourhood', 'crime type' and by 'month'. You can zoom into the neighbourhood to see specific streets where the crimes have happened. You can use the toggle options on the top right corner of the map to zoom in or out, pan the map and reset axes. The top-right bar plot shows the total reported crimes in a selected neighbourhood by 'day of the week' (default all days). This plot can be filtered using the 'neighbourhood' and 'day of the week' options. Finally, the bottom bar plot shows total reported crimes by crime category in each neighbourhood. Here crime types are grouped by crime categories (Violent, Property and Vehicle Collision). Default view shows the total cases for all crime categories. You can toggle through the tab options. From this plot you can see the top crimes in each neighbourhood in 2021. Some summary stats of overall reported crimes in Vancouver in 2021, total property, violent and vehicle collision crimes are reported at the very top"
           )
-          ),
-      id = "simple-toast",
-      header = "About",
-      color = "light",
-      icon = "primary",
-      dismissable = TRUE,
-      is_open = FALSE
-    )
-  )
-),
-      
-      
-      ####
+        ),
+        id = "simple-toast",
+        header = "About",
+        color = "light",
+        icon = "primary",
+        dismissable = TRUE,
+        is_open = FALSE
+      )
+    )),
+    
+    
+    ####
     
     htmlDiv(dccGraph(id = 'van_map')),
-      htmlBr(),
+    htmlBr(),
     
     htmlDiv(dccGraph(id = 'plot-area')),
     htmlBr(),
@@ -178,7 +209,7 @@ app$layout(htmlDiv(
       value = "Break and Enter Commercial",
       style = list('color' = 'white')
     ),
-        
+    
     htmlLabel('Select neighbourhood', style = list('color' = 'white')),
     dccDropdown(
       id = 'neigh_selection',
@@ -189,7 +220,7 @@ app$layout(htmlDiv(
       value = "West End",
       style = list('color' = 'white')
     ),
-        
+    
     htmlLabel('Select month', style = list('color' = 'white')),
     dccDropdown(
       id = 'month_selection',
@@ -199,7 +230,7 @@ app$layout(htmlDiv(
       value = "Jan",
       style = list('color' = 'white')
     ),
-        
+    
     htmlLabel('Select Weekday', style = list('color' = 'white')),
     dccDropdown(
       id = "weekday_dropdown",
@@ -280,17 +311,21 @@ app$callback(output('bar-plot-1', 'figure'),
                input('neigh_selection', 'value'),
                input('crimetype_selection', 'value')
              ),
-             function(crime_category, neighbourhood, crime_type) {
+             function(crime_category,
+                      neighbourhood,
+                      crime_type) {
                crime <- crime %>%
-                 mutate(highlight_col = dplyr::case_when(
-                   TYPE == crime_type ~ TRUE,
-                   TYPE != crime_type ~ FALSE
-                 ))
+                 mutate(highlight_col = dplyr::case_when(TYPE == crime_type ~ TRUE,
+                                                         TYPE != crime_type ~ FALSE))
                if (crime_category == "All") {
                  p <- crime %>%
                    filter(NEIGHBOURHOOD == neighbourhood)  %>%
                    dplyr::add_count(TYPE)  %>%
-                   ggplot(aes(y = reorder(TYPE, n), fill = highlight_col, text = n)) +
+                   ggplot(aes(
+                     y = reorder(TYPE, n),
+                     fill = highlight_col,
+                     text = n
+                   )) +
                    geom_bar() +
                    scale_fill_manual("legend", values = c("TRUE" = "orange", "FALSE" = '#4C78A8')) +
                    ggtitle(paste("Total Reported Cases by Crime Types in", neighbourhood)) +
@@ -314,7 +349,11 @@ app$callback(output('bar-plot-1', 'figure'),
                    filter(NEIGHBOURHOOD == neighbourhood &
                             CRIME_CATEGORY == crime_category)  %>%
                    dplyr::add_count(TYPE)  %>%
-                   ggplot(aes(y = reorder(TYPE, n), fill = highlight_col, text = n)) +
+                   ggplot(aes(
+                     y = reorder(TYPE, n),
+                     fill = highlight_col,
+                     text = n
+                   )) +
                    geom_bar() +
                    scale_fill_manual("legend", values = c("TRUE" = "orange", "FALSE" = '#4C78A8')) +
                    ggtitle(paste(
@@ -354,7 +393,7 @@ app$callback(output('plot-area', 'figure'),
                    filter(NEIGHBOURHOOD == neighbourhood)
                  p <- ggplot(crime_c_new) +
                    aes(x = reorder(CRIME_CATEGORY, n)) +
-                   geom_bar(stat = "count", fill = "skyblue3") +
+                   geom_bar(stat = "count", fill = '#4C78A8') +
                    labs(
                      title = paste("Total Reported Crimes in", neighbourhood),
                      x = "Crime Category",
@@ -383,7 +422,7 @@ app$callback(output('plot-area', 'figure'),
                             NEIGHBOURHOOD == neighbourhood)
                  p <- ggplot(crime_c_new) +
                    aes(x = reorder(CRIME_CATEGORY, n)) +
-                   geom_bar(stat = "count", fill = "skyblue3") +
+                   geom_bar(stat = "count", fill = '#4C78A8') +
                    labs(
                      title = paste("Total Reported Crimes in", neighbourhood, "on", weekday),
                      x = "Crime Category",
@@ -470,16 +509,14 @@ app$callback(list(output('van_map', 'figure')),
                list(van_map)
                
              })
-app$callback(
-  output("simple-toast", "is_open"),
-  list(input("simple-toast-toggle", "n_clicks")),
-  function(n) {
-    if (n > 0) {
-      return(TRUE)
-    }
-    return(dashNoUpdate())
-  }
-)
+app$callback(output("simple-toast", "is_open"),
+             list(input("simple-toast-toggle", "n_clicks")),
+             function(n) {
+               if (n > 0) {
+                 return(TRUE)
+               }
+               return(dashNoUpdate())
+             })
 
 #----------------------------------------------------------------------------#
 
