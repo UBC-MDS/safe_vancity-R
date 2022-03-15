@@ -48,6 +48,7 @@ app$layout(htmlDiv(
         color = "light",
         n_clicks = 0,
         className = "mb-3",
+        style = list(position = "fixed", right = 90),
       ),
       dbcToast(
         list(
@@ -138,7 +139,7 @@ app$layout(htmlDiv(
           )
         ),
         htmlP(
-          " 32,007",
+          "32,007",
           style = list(
             textalign = 'center',
             color = '#4C78A8',
@@ -158,7 +159,7 @@ app$layout(htmlDiv(
           )
         ),
         htmlP(
-          " 21,853",
+          "21,853",
           style = list(
             textalign = 'center',
             color = '#4C78A8',
@@ -318,8 +319,8 @@ app$layout(htmlDiv(
             )
           ),
           
-          htmlH6(paste("Last Updated: ", Sys.time()),
-                 style = list(color = "orange"))
+          htmlLabel(paste("Last Updated: ", Sys.time()),
+                 style = list(color = "orange", `margin-top` = "60px"))
         ),
         className = "create_container three columns"
       ),
@@ -545,10 +546,10 @@ make_map <-
           zoom = 10,
           center = list(lon = -123.116226, lat = 49.246292),
           margin = list(
-            'r' = 25,
-            't' = 25,
-            'l' = 25,
-            'b' = 25
+            'r' = 0,
+            't' = 30,
+            'l' = 0,
+            'b' = 10
           )
         )
       )
