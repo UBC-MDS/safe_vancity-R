@@ -19,36 +19,6 @@ crime <-
 crimetypes_l <- crime %>% select(TYPE) %>% unique()
 neigh_l <- crime %>% select(NEIGHBOURHOOD) %>% unique()
 month_l <- crime %>% select(month_name) %>% unique()
-#----------------------to be moved (if we decide not to write a cleaning script for R)
-
-# crime <- crime  %>%
-#   mutate(
-#     CRIME_CATEGORY = case_when(
-#       TYPE %in% c("Offence Against a Person",
-#                   "Mischief",
-#                   "Homicide") ~ "Violent crimes",
-#       TYPE %in% c(
-#         "Theft from Vehicle",
-#         "Break and Enter Commercial",
-#         "Break and Enter Residential/Other",
-#         "Theft of Bicycle",
-#         "Theft of Vehicle",
-#         "Other Theft"
-#       ) ~ "Property crimes",
-#       TYPE %in% c(
-#         "Vehicle Collision or Pedestrian Struck (with Injury)",
-#         "Vehicle Collision or Pedestrian Struck (with Fatality)"
-#       ) ~ "Vehicle collision"
-#     )
-#   )  %>%
-#   mutate(
-#     TYPE = case_when(
-#       TYPE == "Vehicle Collision or Pedestrian Struck (with Fatality)" ~ "Vehicle collision, Fatal",
-#       TYPE == "Vehicle Collision or Pedestrian Struck (with Injury)" ~ "Vehicle collision, Injured",
-#       TRUE ~ TYPE
-#     )
-#   )
-#----------------------to be moved
 
 tab_style = list(
   "borderBottom" = "1px solid #d6d6d6",
@@ -307,19 +277,27 @@ app$layout(htmlDiv(
 app$callback(output('bar-plot-1', 'figure'),
              list(
                input("crime_category-widget", "value"),
-               input('neigh_selection', 'value')
+               input('neigh_selection', 'value'),
+               input('crimetype_selection', 'value')
              ),
-             function(crime_category, neighbourhood) {
+             function(crime_category, neighbourhood, crime_type) {
+               crime <- crime %>%
+                 mutate(highlight_col = dplyr::case_when(
+                   TYPE == crime_type ~ TRUE,
+                   TYPE != crime_type ~ FALSE
+                 ))
                if (crime_category == "All") {
                  p <- crime %>%
                    filter(NEIGHBOURHOOD == neighbourhood)  %>%
                    dplyr::add_count(TYPE)  %>%
-                   ggplot(aes(y = reorder(TYPE, n), text = n)) +
-                   geom_bar(fill = '#aec7e8') +
+                   ggplot(aes(y = reorder(TYPE, n), fill = highlight_col, text = n)) +
+                   geom_bar() +
+                   scale_fill_manual("legend", values = c("TRUE" = "orange", "FALSE" = '#4C78A8')) +
                    ggtitle(paste("Total Reported Cases by Crime Types in", neighbourhood)) +
                    labs(x = "Number of crime cases", y = "Type of crime") +
                    theme_classic() +
                    theme(
+                     legend.position = 'none',
                      plot.background = element_rect(fill = "#010915"),
                      panel.background = element_rect(fill = "#010915"),
                      # panel.grid.major = element_blank(),
@@ -336,8 +314,9 @@ app$callback(output('bar-plot-1', 'figure'),
                    filter(NEIGHBOURHOOD == neighbourhood &
                             CRIME_CATEGORY == crime_category)  %>%
                    dplyr::add_count(TYPE)  %>%
-                   ggplot(aes(y = reorder(TYPE, n), text = n)) +
-                   geom_bar(fill = '#aec7e8') +
+                   ggplot(aes(y = reorder(TYPE, n), fill = highlight_col, text = n)) +
+                   geom_bar() +
+                   scale_fill_manual("legend", values = c("TRUE" = "orange", "FALSE" = '#4C78A8')) +
                    ggtitle(paste(
                      crime_category,
                      ": Total Reported Cases by Crime Types in",
@@ -346,6 +325,7 @@ app$callback(output('bar-plot-1', 'figure'),
                    labs(x = "Number of crime cases", y = "Type of crime") +
                    theme_classic() +
                    theme(
+                     legend.position = 'none',
                      plot.background = element_rect(fill = "#010915"),
                      panel.background = element_rect(fill = "#010915"),
                      # panel.grid.major = element_blank(),
