@@ -219,7 +219,8 @@ app$layout(htmlDiv(
           style = list(
             `border-width` = "0",
             width = "100%",
-            height = "475px"
+            height = "475px",
+            display = "inline-block"
           )
         )
       )), className = "create_container seven columns"),
