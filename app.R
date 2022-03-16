@@ -88,7 +88,7 @@ app$layout(htmlDiv(
             src = app$get_asset_url("logo-1.jpg"),
             id = "logo_image",
             style = list(
-              height = "80px",
+              height = "60px",
               width = "auto",
               `margin-bottom` = "10px",
               `padding-left` = 0
