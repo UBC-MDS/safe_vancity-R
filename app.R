@@ -85,7 +85,7 @@ app$layout(htmlDiv(
       list(
         htmlDiv(list(
           htmlImg(
-            src = app$get_asset_url("logo-1.jpg"),
+            src = "assets/logo-1.jpg",
             id = "logo_image",
             style = list(
               height = "60px",
