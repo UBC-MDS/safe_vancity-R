@@ -28,7 +28,7 @@ For example, selecting "Mount Pleasant" as neighbourhood, the dashboard will dis
 
 ### App Design
 
-![app](src/images/Dashboard_R.png)
+![app](https://github.com/UBC-MDS/safe_vancity-R/blob/main/src/images/Dashboard_R.png)
 
 ### Implementation and user guide
 
@@ -38,11 +38,11 @@ For example, selecting "Mount Pleasant" as neighbourhood, the dashboard will dis
 
 2. Usage of total reported cases by crime category plot
 
-![App sketch](https://github.com/UBC-MDS/safe_vancity-R/blob/main/src/images/images/Big_bar_chart.gif)
+![App sketch](https://github.com/UBC-MDS/safe_vancity-R/blob/main/src/images/Big_bar_chart.gif)
 
 3. Usage of total reported cases by day of the week plot 
 
-![App sketch](https://github.com/UBC-MDS/safe_vancity-R/blob/main/src/images/images/Smaller_bar_chart.gif)
+![App sketch](https://github.com/UBC-MDS/safe_vancity-R/blob/main/src/images/Smaller_bar_chart.gif)
 
 ## Support
 
