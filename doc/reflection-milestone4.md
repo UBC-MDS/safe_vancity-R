@@ -8,9 +8,13 @@ We have made most of the implementations that we outlined in our proposal. These
 
 1.  An interactive map of `Crime Density by Neighbourhood, Crime Type, and  Month`;
 
-2.  An interactive bar chart of `Total Reported Cases by Neighbourhood and Crime Type`;
+2.  An interactive bar chart of `Total Reported Cases by Neighbourhood, Crime Type, and Crime Category`;
 
 3.  An interactive bar chart of `Total Reported Cases per Crime Category by Weekday and neighbourhood`;
+
+4.  Vancouver-wide summary statistics: `Total Crimes`, `Total Property Crimes`, `Total Violent Crimes`, and `Total Vehical Collision`.
+
+Kindly note that is a parallel version of this dashboard implemented in `Python` [here](https://safevancity.herokuapp.com/), with almost-similar outlook and functionality.
 
 ## 2. What we decided not to implement
 
@@ -51,6 +55,8 @@ If we had more time in the future, we have a couple of potential additions in mi
 -   Implement complete reproducibility. This is most especially important for the underlying dataset so that the dashboard gets updated as soon as the Vancouver Police Department releases new crimes data.
 
 -   Also, we would use a larger dataset, probably as much as 10 years of crime data instead of one year's data that we currently have.
+
+-   We would improve upon the layout views of the containers, as well as fix the `About` section positioning during scrolling.
 
 ## 6. Known Issue and Comments
 
