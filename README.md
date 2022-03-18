@@ -24,7 +24,9 @@ The Safe Vancity app opens to a landing page with three plots. In the bottom lef
 - The bottom bar plot shows the total reported cases in each neighbourhood by crime category (i.e., `Violent`, `Property` or `All` crimes). Users can hover over the plot and see the actual "counts" of cases reported for each selection. There are tabs implemented to select the choice of crime category.  
 - The top-right bar plot allows the user to see the number of crimes reported in a neighbourhood by the `day of the week`. Users can hover over the plot and see the actual "counts" of cases reported for each crime category.
 
-For example, selecting "Mount Pleasant" as neighbourhood, the dashboard will display the crime density in this neighbourhood in the map plot on the top left of the screen, total reported cases in Mount Pleasant by crime type and crime category in the bottom bar plot, and the number of crimes by weekday in Mount Pleasant in the top-right bar plot.
+For example, selecting "West End" as neighbourhood, the dashboard will display the crime density in this neighbourhood in the map plot on the top left of the screen, total reported cases in West End by crime type and crime category in the bottom bar plot, and the number of crimes by weekday in West End in the top-right bar plot.
+
+The illustrations below demonstrates the usage described above. Also, we have shown how you can change the variables to return dynamically changing plots based on your selections. In short, the plots shown to you on the dashboard are entirely based on your selections. We made it easy for you to completely configure what you want to see on the dashboard.
 
 ### App Design
 
