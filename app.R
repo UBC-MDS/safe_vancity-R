@@ -41,7 +41,7 @@ tab_selected_style = list(
 
 app$layout(htmlDiv(
   list(
-    toast <- div(list(
+    div(list(
       dbcButton(
         "About",
         id = "simple-toast-toggle",
@@ -73,7 +73,11 @@ app$layout(htmlDiv(
         color = "light",
         icon = "primary",
         dismissable = TRUE,
-        is_open = FALSE
+        is_open = FALSE,
+        style = list(
+          fontSize = 18, 
+          width = "1200px"
+        )
       )
     )),
     
@@ -287,6 +291,7 @@ app$layout(htmlDiv(
             id = "weekday_dropdown",
             value = "All",
             options = list(
+              list(label = "All", value = "All"),
               list(label = "Sunday", value = "Sunday"),
               list(label = "Monday", value = "Monday"),
               list(label = "Tuesday", value = "Tuesday"),
